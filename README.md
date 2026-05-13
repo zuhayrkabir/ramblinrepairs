@@ -5,7 +5,7 @@ AI-powered computer repair chatbot for Georgia Tech students.
 ## Overview
 Full-stack Django application with RAG-powered chatbot.
 
-**Team Project (Fall 2025)**
+**Team Project (Spring 2026)**
 
 *Note: This is a public version of a team project. Original repo is private.*
 
