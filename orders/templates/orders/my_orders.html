@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Repair Requests</h2>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-primary">
+      Submit New Ticket
+    </a>
+  </div>
+
+  {% if orders %}
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Issue</th>
+            <th>Device</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr data-href="{% url 'orders:order_detail' order.id %}" style="cursor: pointer;" onclick="window.location=this.dataset.href;">
+              <td>{{ order.id }}</td>
+              <td>{{ order.issue_title }}</td>
+              <td>
+                {{ order.device_type|title }}<br>
+                <small class="text-muted">
+                  {{ order.cpu_platform|upper }} · {{ order.gpu_brand|upper }}
+                </small>
+              </td>
+              <td>
+                <span class="badge bg-secondary">
+                  {{ order.get_status_display }}
+                </span>
+              </td>
+              <td>
+                {% if order.priority == "urgent" %}
+                  <span class="badge bg-danger">Urgent</span>
+                {% elif order.priority == "high" %}
+                  <span class="badge bg-warning text-dark">High</span>
+                {% else %}
+                  <span class="badge bg-info text-dark">
+                    {{ order.get_priority_display }}
+                  </span>
+                {% endif %}
+              </td>
+              <td>{{ order.created_at|date:"M d, Y" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info">
+      You haven't submitted any repair requests yet.
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock content %}

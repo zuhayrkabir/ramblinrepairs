@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}RAG Chatbot Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <div class="admin-dashboard">
+
+    <h1 class="mb-4">RAG Chatbot Admin Dashboard</h1>
+
+    <!-- API Key Selection -->
+    <div class="admin-section">
+      <h2>OpenRouter API Key Selection</h2>
+      <p class="text-muted small mt-2">Choose which API key to use for chatbot requests</p>
+
+      <form method="post" class="mt-3">
+        {% csrf_token %}
+        <input type="hidden" name="select_api_key" value="1">
+
+        <div class="api-key-selection">
+          {% for choice_value, choice_label in api_key_form.active_key_index.field.choices %}
+            <div class="form-check mb-2">
+              <input 
+                class="form-check-input" 
+                type="radio" 
+                name="active_key_index" 
+                id="id_key_{{ choice_value }}" 
+                value="{{ choice_value }}"
+                {% if api_key_form.active_key_index.value|stringformat:"s" == choice_value %}checked{% endif %}
+              >
+              <label class="form-check-label" for="id_key_{{ choice_value }}">
+                {{ choice_label }}
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if api_key_form.non_field_errors %}
+          <div class="alert alert-danger mt-3">
+            {% for error in api_key_form.non_field_errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if api_key_form.active_key_index.errors %}
+          <div class="alert alert-danger mt-3">
+            {% for error in api_key_form.active_key_index.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <button class="btn btn-primary mt-3" type="submit">
+          Update API Key
+        </button>
+      </form>
+    </div>
+
+    <!-- User Story 10 -->
+    <div class="admin-section">
+      <h2>System Performance</h2>
+      <p class="text-muted small mt-2">Based on {{ performance_data.total_requests }} queries (last 7 days)</p>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <div class="metric-box">
+            <strong>Average Latency (ms)</strong>
+            <div class="metric-value">{{ performance_data.latency_ms }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="metric-box">
+            <strong>Failure Rate (%)</strong>
+            <div class="metric-value">{{ performance_data.failure_rate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Story 11 -->
+    <div class="admin-section">
+      <h2>Knowledge Base Controls</h2>
+      <p class="text-muted small mt-2 mb-0">
+        Manually fix or refresh the chatbot's curated knowledge base by editing the FAQ
+        entries it draws from. Add, change, or remove FAQs and save to reload them
+        instantly.
+      </p>
+
+      <div class="mt-3">
+        <a class="btn btn-primary" href="{% url 'admin_panel:manage_faqs' %}">
+          Edit FAQs
+        </a>
+      </div>
+    </div>
+
+    <!-- User Story 12 -->
+    <div class="admin-section">
+      <h2>Usage Logs</h2>
+
+      <div class="table-responsive mt-3">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Query</th>
+              <th>Timestamp</th>
+              <th>Response Time</th>
+              <th>Model</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for log in usage_logs %}
+              <tr>
+                <td>{{ log.query }}</td>
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.response_time_ms }} ms</td>
+                <td>{{ log.model }}</td>
+                <td>{{ log.status }}</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">No usage logs available yet.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <a href="{% url 'admin:index' %}" class="btn btn-secondary mt-4">
+      Django Admin Page
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}

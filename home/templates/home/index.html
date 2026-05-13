@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<header class="masthead bg-index text-white text-center py-4">
+  <div class="container d-flex align-items-center flex-column pt-2">
+    <div class="about-overlay">
+      <h2>Ramblin' Repairs</h2>
+      <p>Your easy way to get computer repairs fast at GT!</p>
+    </div>
+    <div class="about-overlay col-md-6 mx-auto mb-3">
+        <h2>Our Mission</h2>
+        <hr />
+        <p>
+           <!--CHANGE THIS LATER-->
+          At Ramblin’ Repairs, our mission is simple: make computer repair convenient, fast, and accessible for students on campus.
+
+As students ourselves, we know how disruptive tech issues can be—whether it’s a laptop that won’t boot before an exam, a broken screen in the middle of a project sprint, or performance issues slowing down your workflow. Off-campus repair shops are often expensive, slow, and inconvenient, especially when you’re juggling classes, clubs, and deadlines.
+
+Ramblin’ Repairs exists to solve that problem. We provide an on-campus repair solution designed specifically for students, with clear communication, fair pricing, and turnaround times that respect how important your device is to your academic life. Our goal is to get you back up and running with as little stress as possible.
+        </p>
+        <h2>About Us</h2>
+        <hr />
+          Hi! We're the Ramblin’ Repairs team.
+
+We started this service after seeing how often students struggle with computer issues and how few convenient, trustworthy options there are nearby. Whether it’s diagnosing hardware problems, troubleshooting software issues, or helping someone understand what’s actually going wrong with their device, we genuinely enjoy breaking problems down and fixing them.
+
+Ramblin’ Repairs is intentionally small and student-focused. When you submit a ticket, you’re not dealing with a faceless company — you’re working directly with someone who understands campus life, coursework pressures, and the importance of reliable tech. We aim to be transparent, honest, and helpful at every step of the process.
+
+If you ever have questions about a repair, pricing, or whether something is even worth fixing, I’m always happy to talk it through.
+        <hr />
+      </div>
+  </div>
+</header>
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col mx-auto text-center mb-3">
+        <h4>Welcome to Ramblin' Repairs!</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div class="text-center">
+    <h3 class="mb-3">Need help with your device?</h3>
+    <p class="text-muted mb-4">
+      Create an account to submit a repair request and track your ticket.
+    </p>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'orders:order_create' %}"
+         class="btn btn-primary btn-lg px-5 py-3">
+        <i class="fa-solid fa-screwdriver-wrench me-2"></i>
+        Submit a Repair Ticket
+      </a>
+    {% else %}
+      <a href="{% url 'accounts.signup' %}"
+         class="btn btn-primary btn-lg px-5 py-3">
+        <i class="fa-solid fa-user-plus me-2"></i>
+        Create an Account to Get Started
+      </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

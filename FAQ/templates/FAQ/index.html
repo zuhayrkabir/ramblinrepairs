@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+
+  <div class="row g-4">
+    <!-- Left: Download / Quick Info -->
+    <div class="col-12 col-lg-4">
+      <div class="p-4 rounded-4 border bg-light">
+        <h2 class="h4 mb-2">Terms & FAQ</h2>
+        <p class="text-muted mb-3">
+          Click a question to expand the answer. You can also download our Terms PDF for your records.
+        </p>
+
+        <!-- PDF DOWNLOAD LINK -->
+        <a class="btn btn-dark w-100"
+           href="{% static 'docs/terms_of_service.pdf' %}"
+           download>
+          <i class="fa-solid fa-file-arrow-down me-2"></i>
+          Download Terms (PDF)
+        </a>
+
+        <hr class="my-4">
+
+        {% if user.is_authenticated and user.is_staff %}
+        <a class="btn btn-outline-dark w-100"
+           href="{% url 'admin_panel:manage_faqs' %}">
+          <i class="fa-solid fa-pen-to-square me-2"></i>
+          Edit FAQs
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right: FAQ Accordion -->
+    <div class="col-12 col-lg-8">
+      <div class="mb-3">
+        <h1 class="h3 mb-1">Frequently Asked Questions</h1>
+        <p class="text-muted mb-0">
+          Clear answers up front
+        </p>
+      </div>
+
+      <div class="accordion" id="faqAccordion">
+        {% for faq in faqs %}
+        <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+          <h2 class="accordion-header" id="q{{ faq.id }}">
+            <button class="accordion-button collapsed fw-semibold"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#a{{ faq.id }}"
+                    aria-expanded="false"
+                    aria-controls="a{{ faq.id }}">
+              {{ faq.question }}
+            </button>
+          </h2>
+          <div id="a{{ faq.id }}" class="accordion-collapse collapse" aria-labelledby="q{{ faq.id }}" data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              {{ faq.answer|safe|linebreaksbr }}
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-light border" role="alert">
+          No FAQs are available right now. Please check back later.
+        </div>
+        {% endfor %}
+      </div><!-- /accordion -->
+
+      <!-- Optional: small note at bottom -->
+      <div class="text-muted small mt-3">
+        By using our services, you agree to our Terms. Download the PDF above for a full copy.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

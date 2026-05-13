@@ -1,0 +1,187 @@
+.btn-primary {
+    background: #B3A369;
+    border: 1px solid #B3A369;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: #a0925a;
+}
+
+:root {
+  --gt-gold: #B3A369;
+}
+.bg-index{
+  background: url("/static/img/background.jpg") no-repeat fixed;
+  background-size: 100% auto;
+}
+.navbar a.nav-link {
+  color: #FFFEF6 !important;
+}
+.bg-dark {
+  background-color: #2E2E2E !important;
+}
+
+.navbar-gt {
+  background-color: #B3A369 !important;
+}
+
+.about-overlay {
+  background-color: rgba(0, 0, 0, 0.55); /* dark overlay */
+  color: white;
+  padding: 1.75rem 3rem;
+  max-width: 800px;
+  margin: 4rem auto;
+  border-radius: 12px;
+
+  /* subtle depth */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.logo-bg {
+  background-color: rgba(0, 0, 0, 0.35); /* same idea as about overlay */
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+
+  /* optional polish */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.footer {
+  background-color: #1c1c1c;
+  color: #f1f1f1;
+}
+
+.footer .text-muted {
+  color: #cfcfcf !important;
+}
+
+/* Admin dashboard */
+
+.admin-dashboard {
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 12px;
+  max-width: 1100px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.admin-dashboard h1,
+.admin-dashboard h2 {
+  color: #2E2E2E;
+}
+
+.admin-section {
+  background-color: #FFFEF6;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid var(--gt-gold);
+}
+
+.metric-box {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.metric-box strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2E2E2E;
+}
+
+.metric-box input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+}
+
+.metric-box .metric-value {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #2E2E2E;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.btn-danger,
+.btn-warning {
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.admin-table th {
+  background-color: #2E2E2E;
+  color: #FFFEF6;
+  padding: 0.75rem;
+}
+
+.admin-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* API Key Selection Styles */
+.api-key-selection {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.api-key-selection .form-check {
+  padding: 0.75rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.api-key-selection .form-check:hover {
+  background-color: #f1f1f1;
+  border-left-color: var(--gt-gold);
+}
+
+.api-key-selection .form-check-input {
+  margin-top: 0.25rem;
+  cursor: pointer;
+  accent-color: var(--gt-gold);
+}
+
+.api-key-selection .form-check-label {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+
+.api-key-selection .form-check-input:checked ~ .form-check-label {
+  color: var(--gt-gold);
+}
+
